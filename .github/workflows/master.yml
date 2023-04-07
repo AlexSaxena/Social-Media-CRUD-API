@@ -3,14 +3,14 @@ name: Run Jest tests
 on:
   pull_request:
     branches:
-    - main
+    - master
   push:
     branches:
-    - main
+    - master
 
 jobs:
   jestTest:
-    runs-on: macro-latest 
+    runs-on: macos-latest 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
