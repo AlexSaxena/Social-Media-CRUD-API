@@ -6,7 +6,7 @@ dotenv.config({path: "./config/.env"});
 // gets token from .env
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 // gets token from from cookies
-const LOGIN_TOKEN_COOKIE_NAME = "loginToken";
+const LOGIN_TOKEN_COOKIE_NAME = "authToken";
 
 // checkLoginToken function to verify if user have cookie with JWT token
 
