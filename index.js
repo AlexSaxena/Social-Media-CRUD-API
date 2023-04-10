@@ -5,6 +5,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { connect } = require("./db/connect");
+const { authRoute } = require("./routes/authRoute");
 
 const app = express();
 
@@ -16,7 +17,7 @@ const { registerRoutes } = require("./routes/registerRoute");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -27,6 +28,7 @@ connect();
 
 // Route -> User Registration
 app.use("/register", registerRoutes);
+app.use("/auth", authRoute);
 
 // Server Port
 app.listen(5050, () => {
