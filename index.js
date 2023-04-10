@@ -5,13 +5,12 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { connect } = require("./db/connect");
-const { authRoute } = require("./routes/authRoute");
 
 const app = express();
 
 // Routes & Middleware
 const { checkLoginToken } = require("./middleware/checkLoginToken");
-const { registerRoutes } = require("./routes/registerRoute");
+const { authRoute } = require("./routes/authRoute");
 
 // Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
@@ -26,8 +25,7 @@ app.use(cookieParser());
 //Establish database connection
 connect();
 
-// Route -> User Registration
-app.use("/register", registerRoutes);
+// Route -> Auth Routes, Login/Register
 app.use("/auth", authRoute);
 
 // Server Port
