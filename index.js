@@ -4,6 +4,7 @@ console.log("General Kenobi");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const { connect } = require('./db/connect')
 
 const app = express();
 
@@ -16,6 +17,10 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+//Establish database connection
+connect()
+
 
 // Server Port
 app.listen(5050, () => {
