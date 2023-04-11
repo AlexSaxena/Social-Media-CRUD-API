@@ -29,7 +29,7 @@ connect();
 // Route -> Auth Routes, Login/Register
 app.use("/auth", authRoute);
 
-app.use('/post', postRoute);
+app.use('/post', checkLoginToken, postRoute);
 
 // Server Port
 app.listen(5050, () => {
