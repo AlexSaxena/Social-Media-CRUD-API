@@ -4,13 +4,14 @@ console.log("General Kenobi");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { connect } = require("./db/connect");
+const {connect} = require("./db/connect");
 
 const app = express();
 
 // Routes & Middleware
-const { checkLoginToken } = require("./middleware/checkLoginToken");
-const { authRoute } = require("./routes/authRoute");
+const {checkLoginToken} = require("./middleware/checkLoginToken");
+const {authRoute} = require("./routes/authRoute");
+const {postRoute} = require("./routes/postRoute");
 
 // Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
@@ -27,6 +28,9 @@ connect();
 
 // Route -> Auth Routes, Login/Register
 app.use("/auth", authRoute);
+// Route -> Posts routes, NewPost/GetAllPosts/GetSinglePost/PatchPost/DeletePost
+// app.use("/posts", [checkLoginToken], postRoute);
+app.use("/posts", postRoute);
 
 // Server Port
 app.listen(5050, () => {
