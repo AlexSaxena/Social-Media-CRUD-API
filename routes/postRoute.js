@@ -1,10 +1,10 @@
 const express = require("express");
 const {
-  editpost,
+  editPost,
 } = require("../controllers/userPostControllers/editPostController");
 
 const postRoute = express.Router();
 
-postRoute.patch("/editPost:id", editpost);
+postRoute.patch("/editPost:id", editPost);
 
 exports.postRoute = postRoute;
