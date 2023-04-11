@@ -5,7 +5,6 @@ const {
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv").config({ path: "../../config/.env" });
 const jwt = require("jsonwebtoken");
-const { connect } = require('../../db/connect')
 
 //Function called upon successful login. Creates a jwt access token.
 const generateAccessToken = (username) => {
