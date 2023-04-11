@@ -1,15 +1,15 @@
 const {
   loginSchema,
-  checkUserExists,
-  loginUser,
+  checkUserExists
 } = require("../../model/authModel");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv").config({ path: "../../config/.env" });
 const jwt = require("jsonwebtoken");
+const { connect } = require('../../db/connect')
 
 //Function called upon successful login. Creates a jwt access token.
-const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+const generateAccessToken = (username) => {
+  return jwt.sign({ user: username }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
 };
 
 const login = async (req, res) => {
@@ -32,7 +32,7 @@ const login = async (req, res) => {
         //Compares the hashed password stored in database with password from req.body
         //If passwords match, creates JWT token and set it as a cookie.
         if (await bcrypt.compare(password, user.password)) {
-          const accessToken = generateAccessToken(user);
+          const accessToken = generateAccessToken(user.username);
           return res
             .cookie("authToken", accessToken, {
               httpOnly: true,
