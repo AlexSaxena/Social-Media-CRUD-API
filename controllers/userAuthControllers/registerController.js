@@ -1,14 +1,13 @@
 const { connect } = require("../../db/connect");
-const { loginSchema, checkUserExists } = require("../../model/authModel");
+const { registerSchema, checkUserExists } = require("../../model/authModel");
 
 const register = async function (req, res) {
-  let validation = loginSchema.validate(req.body);
+  let validation = registerSchema.validate(req.body);
   if (validation.error) {
     return res
       .json({ message: validation.error.details[0].message })
       .status(406);
   }
-
   const { username, password } = req.body;
   const checkUser = await checkUserExists(username);
 
