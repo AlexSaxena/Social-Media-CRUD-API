@@ -11,6 +11,7 @@ const app = express();
 // Routes & Middleware
 const { checkLoginToken } = require("./middleware/checkLoginToken");
 const { authRoute } = require("./routes/authRoute");
+const { postRoute } = require("./routes/postRoute");
 
 // Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
@@ -27,6 +28,7 @@ connect();
 
 // Route -> Auth Routes, Login/Register
 app.use("/auth", authRoute);
+app.use("/posts", checkLoginToken, postRoute);
 
 // Server Port
 app.listen(5050, () => {
