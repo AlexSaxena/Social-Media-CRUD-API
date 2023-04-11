@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const { connect } = require("../../db/connect");
 const { registerSchema, checkUserExists } = require("../../model/authModel");
 
@@ -8,15 +9,19 @@ const register = async function (req, res) {
       .json({ message: validation.error.details[0].message })
       .status(406);
   }
+
   const { username, password } = req.body;
   const checkUser = await checkUserExists(username);
 
   if (checkUser) {
     return res.status(409).json({ message: "User Already Exists!" });
   } else {
+    const salt = bcrypt.genSaltSync(10);
+    const cryptedPassword = bcrypt.hashSync(password, salt);
+
     let newUserData = {
       username: username,
-      password: password,
+      password: cryptedPassword,
       date,
       following: [],
     };
