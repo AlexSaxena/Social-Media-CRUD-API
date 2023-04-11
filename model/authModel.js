@@ -53,7 +53,7 @@ const checkUserExists = async (username) => {
   if (user === null) {
     return false;
   }
-  return { username: user.username };
+  return { username: user.username, password: user.password };
 };
 
 module.exports = {
