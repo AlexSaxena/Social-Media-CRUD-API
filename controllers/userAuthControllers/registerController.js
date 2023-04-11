@@ -6,8 +6,8 @@ const register = async function (req, res) {
   let validation = registerSchema.validate(req.body);
   if (validation.error) {
     return res
-      .json({ message: validation.error.details[0].message })
-      .status(406);
+      .status(406)
+      .json({ message: validation.error.details[0].message });
   }
 
   const { username, password } = req.body;
