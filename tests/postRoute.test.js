@@ -1,6 +1,6 @@
 const request = require("supertest");
 const express = require("express");
-const { authRoute } = require("../routes/authRoute");
+const { postRoute } = require("../routes/postRoute");
 
 const app = express();
 
