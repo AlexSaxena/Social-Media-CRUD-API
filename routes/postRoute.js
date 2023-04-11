@@ -4,7 +4,7 @@ const {
 } = require("../controllers/userPostControllers/editPostController");
 
 const postRoute = express.Router();
-
-postRoute.patch("/editPost:id", editPost);
+// no questionmarks in Params url
+postRoute.patch("/editPost/:id", editPost);
 
 exports.postRoute = postRoute;
