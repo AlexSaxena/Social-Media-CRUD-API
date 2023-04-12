@@ -18,9 +18,13 @@ const editPost = async function (req, res) {
 
   const { id, body } = req.body;
   const { user } = req.loggedInUser;
-  console.log(id);
-  console.log(body);
-  console.log(user);
+  console.log(id, body, user);
+
+  const checkPost = await checkPostExist(id, user);
+
+  if (checkPost === false) {
+    return res.status(404).json({ message: "Post doesn't exist" });
+  }
 
   res.status(200).json({ id: "Id is ->" + id, body: body });
 };
