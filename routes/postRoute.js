@@ -10,7 +10,7 @@ const postRoute = express.Router();
 
 // no questionmarks in Params url
 // Edit Route
-postRoute.patch("/editPost/:id", editPost);
+postRoute.patch("/:id", editPost);
 
 // DELETE route
 postRoute.delete("/", deletePost);
