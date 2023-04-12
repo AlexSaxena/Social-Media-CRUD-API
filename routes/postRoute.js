@@ -4,7 +4,7 @@ const {deletePost} = require('../controllers/userPostControllers/deletePostContr
 
 const postRoute = express.Router();
 
-postRoute.post('/create', createPost)
+postRoute.post('/', createPost)
 // DELETE route
 postRoute.delete('/', deletePost);
 
