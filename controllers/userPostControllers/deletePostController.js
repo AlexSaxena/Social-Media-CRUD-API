@@ -9,8 +9,9 @@ const deletePost = async function (req, res) {
   }
 
   const {id} = req.body;
+  const {user} = req.loggedInUser;
 
-  const checkPost = await checkPostExist(id);
+  const checkPost = await checkPostExist(id, user);
 
   if (checkPost === false) {
     return res.status(404).json({message: "Post doesn't exist"});
@@ -19,7 +20,7 @@ const deletePost = async function (req, res) {
       const db = await connect();
       const collection = db.collection('posts');
 
-      await collection.deleteOne({_id: new ObjectId(id)});
+      await collection.deleteOne({_id: new ObjectId(id), userID: user});
 
       return res.status(200).json({message: 'Post deleted successfully'});
     } catch (err) {
