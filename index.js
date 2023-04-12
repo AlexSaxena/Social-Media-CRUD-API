@@ -12,6 +12,7 @@ const app = express();
 const { checkLoginToken } = require("./middleware/checkLoginToken");
 const { authRoute } = require("./routes/authRoute");
 const { postRoute } = require("./routes/postRoute");
+const { userRoute } = require("./routes/userRoute");
 
 // Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
@@ -28,7 +29,10 @@ connect();
 
 // Route -> Auth Routes, Login/Register
 app.use("/auth", authRoute);
-app.use("/posts", checkLoginToken, postRoute);
+// Route -> Posts routes, NewPost/GetAllPosts/GetSinglePost/PatchPost/DeletePost
+app.use("/posts", [checkLoginToken], postRoute);
+
+app.use("/users", checkLoginToken, userRoute);
 
 // Server Port
 app.listen(5050, () => {
