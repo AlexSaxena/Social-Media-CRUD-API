@@ -3,15 +3,26 @@
 // Check post exist
 // If Doesn't Exist send error msg
 // If exist let user edit post
-
+const { ObjectId } = require("mongodb");
 const { connect } = require("../../db/connect");
-const { IDCheckSchema, checkPostExist } = require("../../model/authModel");
+const { IDCheckSchema, checkPostExist } = require("../../model/postModel");
 // Current user - token
 
 const editPost = async function (req, res) {
-  let { id } = req.params;
+  let validation = IDCheckSchema.validate(req.body);
+  if (validation.error) {
+    return res
+      .status(406)
+      .json({ message: validation.error.details[0].message });
+  }
+
+  const { id, body } = req.body;
+  const { user } = req.loggedInUser;
   console.log(id);
-  res.status(200).json({ message: "Hello From EditPost", id: "Id is ->" + id });
+  console.log(body);
+  console.log(user);
+
+  res.status(200).json({ id: "Id is ->" + id, body: body });
 };
 
 exports.editPost = editPost;
