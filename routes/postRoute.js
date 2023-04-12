@@ -1,5 +1,5 @@
 const express = require('express');
-const { createPost } = require('../controllers/postControllers/createPost');
+const { createPost } = require('../controllers/postControllers/createPostController');
 const {deletePost} = require('../controllers/userPostControllers/deletePostController');
 
 const postRoute = express.Router();
