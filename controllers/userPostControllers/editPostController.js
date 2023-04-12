@@ -1,6 +1,6 @@
 const { ObjectId } = require("mongodb");
 const { connect } = require("../../db/connect");
-const { IDCheckSchema, checkPostExist } = require("../../model/postModel");
+const { patchSchema, checkPostExist } = require("../../model/postModel");
 
 const editPost = async function (req, res) {
   let validation = IDCheckSchema.validate(req.body);

@@ -13,7 +13,7 @@ const deleteSchema = Joi.object({
 });
 
 // Joi Validation schema for endpoints /posts/PATCH.
-const IDCheckSchema = Joi.object({
+const patchSchema = Joi.object({
   id: Joi.string().length(24).required(),
   body: Joi.string().required(),
 });
@@ -36,6 +36,6 @@ const checkPostExist = async (id, user) => {
 module.exports = {
   postSchema,
   deleteSchema,
-  IDCheckSchema,
+  patchSchema,
   checkPostExist,
 };
