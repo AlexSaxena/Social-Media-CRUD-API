@@ -1,5 +1,7 @@
-const logout = async function (req, res) {
-  return res.json({ message: "User Successfully Logged Out" });
+exports.logout = (req, res) => {
+  res
+    .cookie("authToken", "", {
+      maxAge: 1,
+    })
+    .json({ message: "User Logged Out!" });
 };
-
-exports.logout = logout;
