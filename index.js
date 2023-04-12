@@ -30,11 +30,9 @@ connect();
 // Route -> Auth Routes, Login/Register
 app.use('/auth', authRoute);
 // Route -> Posts routes, NewPost/GetAllPosts/GetSinglePost/PatchPost/DeletePost
-app.use('/posts', [checkLoginToken], postRoute);
+app.use('/posts', checkLoginToken, postRoute);
 
-app.use('/users', checkLoginToken, userRoute)
-
-app.use('/post', checkLoginToken, postRoute);
+app.use('/users', checkLoginToken, userRoute);
 
 // Server Port
 app.listen(5050, () => {
