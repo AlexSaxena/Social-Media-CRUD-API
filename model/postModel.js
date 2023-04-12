@@ -2,6 +2,11 @@ const {connect} = require('../db/connect');
 const Joi = require('joi');
 const {ObjectId} = require('mongodb');
 
+//Joi validation schema for endpoint /posts/create
+const postSchema = Joi.object({
+    body: Joi.string().required()
+})
+
 // Joi Validation schema for endpoint /posts/delete
 const deleteSchema = Joi.object({
   id: Joi.string().length(24).required(),
@@ -20,6 +25,7 @@ const checkPostExist = async (id, user) => {
 };
 
 module.exports = {
+  postSchema,
   deleteSchema,
   checkPostExist,
 };

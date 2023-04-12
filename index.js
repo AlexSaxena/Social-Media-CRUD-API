@@ -34,6 +34,8 @@ app.use('/posts', [checkLoginToken], postRoute);
 
 app.use('/users', checkLoginToken, userRoute)
 
+app.use('/post', checkLoginToken, postRoute);
+
 // Server Port
 app.listen(5050, () => {
   console.log(`\x1b[33m  Server running on http://localhost:5050 \x1b[0m`);
