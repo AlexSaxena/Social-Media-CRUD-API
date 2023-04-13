@@ -1,7 +1,7 @@
 exports.logout = (req, res) => {
   res
-    .cookie("authToken", "", {
+    .cookie('authToken', '', {
       maxAge: 1,
     })
-    .json({ message: "User Logged Out!" });
+    .json({message: 'User Logged Out!'});
 };
