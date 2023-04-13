@@ -14,7 +14,14 @@ const singlePost = async (req, res) => {
 
   const { id } = req.body;
 
-  res.send("Hello from SinglePost Controller");
+  const db = await connect();
+  const postCollection = db.collection("posts");
+  const selectedPost = await postCollection.findOne({ _id: new ObjectId(id) });
+
+  if (selectedPost === null)
+    return res.status(404).json({ message: "Post Not Found" });
+
+  res.json({ post: selectedPost });
 };
 
 exports.singlePost = singlePost;
