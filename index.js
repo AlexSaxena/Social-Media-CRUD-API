@@ -1,24 +1,24 @@
-console.log('General Kenobi');
+console.log("General Kenobi");
 
 // Dependencies
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const {connect} = require('./db/connect');
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const { connect } = require("./db/connect");
 
 const app = express();
 
 // Routes & Middleware
-const {checkLoginToken} = require('./middleware/checkLoginToken');
-const {authRoute} = require('./routes/authRoute');
-const {postRoute} = require('./routes/postRoute');
-const {userRoute} = require('./routes/userRoute')
+const { checkLoginToken } = require("./middleware/checkLoginToken");
+const { authRoute } = require("./routes/authRoute");
+const { postRoute } = require("./routes/postRoute");
+const { userRoute } = require("./routes/userRoute");
 
 // Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -28,11 +28,11 @@ app.use(cookieParser());
 connect();
 
 // Route -> Auth Routes, Login/Register
-app.use('/auth', authRoute);
+app.use("/auth", authRoute);
 // Route -> Posts routes, NewPost/GetAllPosts/GetSinglePost/PatchPost/DeletePost
-app.use('/posts', checkLoginToken, postRoute);
+app.use("/posts", checkLoginToken, postRoute);
 
-app.use('/users', checkLoginToken, userRoute);
+app.use("/users", checkLoginToken, userRoute);
 
 // Server Port
 app.listen(5050, () => {
