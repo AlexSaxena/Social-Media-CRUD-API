@@ -1,11 +1,9 @@
 const { ObjectId } = require("mongodb");
 const { connect } = require("../../db/connect");
-const { deleteSchema } = require("../../model/postModel");
-// Same Model as deleteSchema Can be changed Later
+const { findOnePostSchema } = require("../../model/postModel");
 
 const singlePost = async (req, res) => {
-  // deletSchema can be changed later
-  let validation = deleteSchema.validate(req.body);
+  let validation = findOnePostSchema.validate(req.body);
   if (validation.error) {
     return res
       .status(406)
@@ -14,6 +12,7 @@ const singlePost = async (req, res) => {
 
   const { id } = req.body;
 
+  // Checks DB for desired post
   const db = await connect();
   const postCollection = db.collection("posts");
   const selectedPost = await postCollection.findOne({ _id: new ObjectId(id) });
