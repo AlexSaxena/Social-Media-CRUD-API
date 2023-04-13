@@ -20,7 +20,7 @@ const register = async function (req, res) {
     const cryptedPassword = bcrypt.hashSync(password, salt);
 
     let newUserData = {
-      username: username,
+      username: username.toLowerCase(),
       password: cryptedPassword,
       date,
       following: [],
