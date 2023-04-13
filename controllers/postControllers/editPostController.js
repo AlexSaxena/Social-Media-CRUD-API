@@ -3,7 +3,7 @@ const { connect } = require("../../db/connect");
 const { patchSchema, checkPostExist } = require("../../model/postModel");
 
 const editPost = async function (req, res) {
-  let validation = IDCheckSchema.validate(req.body);
+  let validation = patchSchema.validate(req.body);
   if (validation.error) {
     return res
       .status(406)

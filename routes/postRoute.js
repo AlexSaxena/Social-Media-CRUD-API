@@ -1,10 +1,10 @@
 const express = require("express");
 const {
   editPost,
-} = require("../controllers/userPostControllers/editPostController");
+} = require("../controllers/postControllers/editPostController");
 const {
   deletePost,
-} = require("../controllers/userPostControllers/deletePostController");
+} = require("../controllers/postControllers/deletePostController");
 const { createPost } = require("../controllers/postControllers/createPost");
 
 const postRoute = express.Router();
