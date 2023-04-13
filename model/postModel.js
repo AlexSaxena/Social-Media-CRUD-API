@@ -10,6 +10,15 @@ const deleteSchema = Joi.object({
   id: Joi.string().length(24).required(),
 });
 
+
+// Joi Validation schema for endpoint /posts/post
+// NOTE: Can be refactored later when all Schemas are at place
+const findOnePostSchema = Joi.object({
+  id: Joi.string().length(24).required(),
+});
+
+// Joi Validation schema for endpoints /posts/PATCH.
+
 const patchSchema = Joi.object({
   id: Joi.string().length(24).required(),
   body: Joi.string().required(),
@@ -30,6 +39,7 @@ const checkPostExist = async (id, user) => {
 
 module.exports = {
   postSchema,
+  findOnePostSchema,
   deleteSchema,
   patchSchema,
   checkPostExist,
