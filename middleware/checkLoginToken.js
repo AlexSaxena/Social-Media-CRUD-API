@@ -1,20 +1,16 @@
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
-dotenv.config({path: "./config/.env"});
+dotenv.config({path: './config/.env'});
 
-// gets token from .env
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
-// gets token from from cookies
-const LOGIN_TOKEN_COOKIE_NAME = "authToken";
 
-// checkLoginToken function to verify if user have cookie with JWT token
+const LOGIN_TOKEN_COOKIE_NAME = 'authToken';
 
 exports.checkLoginToken = function checkLoginToken(req, res, next) {
-  //destruct required cookies and check if present
   const {cookies} = req;
   if (!cookies[LOGIN_TOKEN_COOKIE_NAME]) {
-    return res.status(404).json({message: "No Active LoginToken"});
+    return res.status(401).json({message: 'No Active LoginToken'});
   }
 
   try {
@@ -24,6 +20,6 @@ exports.checkLoginToken = function checkLoginToken(req, res, next) {
     next();
   } catch (error) {
     console.error(error);
-    res.status(401).json({message: "Unauthorized LoginToken"});
+    res.status(401).json({message: 'Unauthorized LoginToken'});
   }
 };

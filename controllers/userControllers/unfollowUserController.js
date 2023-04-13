@@ -44,4 +44,4 @@ const unfollowUser = async (req, res) => {
 
 module.exports = {
   unfollowUser,
-}
+};
