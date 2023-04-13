@@ -1,9 +1,8 @@
-const { MongoClient } = require("mongodb");
-const dotenv = require('dotenv').config({ path: './config/.env' })
+const {MongoClient} = require('mongodb');
+require('dotenv').config({path: './config/.env'});
 
-
-const uri = process.env.URI
-const database = process.env.DATABASE
+const uri = process.env.URI;
+const database = process.env.DATABASE;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -21,6 +20,16 @@ async function connect() {
   }
 }
 
+async function disconnect() {
+  await client.close();
+}
+
+function getClientDB() {
+  return client.db(database);
+}
+
 module.exports = {
   connect,
+  disconnect,
+  getClientDB,
 };

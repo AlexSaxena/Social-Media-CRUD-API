@@ -2,7 +2,7 @@ const {followUserSchema, getFollowingList} = require('../../model/userModel');
 const {checkUserExists} = require('../../model/authModel');
 const {getClientDB} = require('../../db/connect');
 
-const followUser = async (req, res) => {
+const unfollowUser = async (req, res) => {
   try {
     const {error, value} = followUserSchema.validate(req.body);
     if (error) {
@@ -22,15 +22,15 @@ const followUser = async (req, res) => {
       return res.status(404).json({message: 'User not found'});
     }
 
-    if (followingList.includes(username)) {
-      return res.status(409).json({message: "You're already following that user"});
+    if (!followingList.includes(username)) {
+      return res.status(409).json({message: "You're not following that user"});
     }
 
     const db = await getClientDB();
     const collection = db.collection('users');
-    const update = await collection.updateOne({username: req.loggedInUser.user}, {$push: {following: username}});
+    const update = await collection.updateOne({username: req.loggedInUser.user}, {$pull: {following: username}});
     if (update.modifiedCount) {
-      return res.status(200).json({message: 'Successfully followed user!'});
+      return res.status(200).json({message: 'Successfully unfollowed user!'});
     }
     return res.status(500).json({message: 'No changes have been made'});
   } catch (error) {
@@ -39,5 +39,5 @@ const followUser = async (req, res) => {
 };
 
 module.exports = {
-  followUser,
+  unfollowUser,
 };
