@@ -10,6 +10,9 @@ const {
 const {
   editPost,
 } = require("../controllers/postControllers/editPostController");
+const {
+  singlePost,
+} = require("../controllers/postControllers/getSinglePostController");
 
 const postRoute = express.Router();
 
@@ -17,6 +20,8 @@ const postRoute = express.Router();
 postRoute.post("/", createPost);
 
 postRoute.get("/all", getAllPosts);
+// Get Single Post Route
+postRoute.get("/post/", singlePost);
 // PATCH Route Edit post
 postRoute.patch("/", editPost);
 // DELETE route
