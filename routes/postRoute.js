@@ -1,12 +1,14 @@
 const express = require('express');
-const { createPost } = require('../controllers/postControllers/createPost');
+
+const { createPost } = require('../controllers/postControllers/createPostController');
 const { getAllPosts } = require('../controllers/postControllers/getAllPosts');
-const {deletePost} = require('../controllers/userPostControllers/deletePostController');
+const {deletePost} = require('../controllers/postControllers/deletePostController');
 
 const postRoute = express.Router();
 
-postRoute.post('/create', createPost)
+postRoute.post('/', createPost)
 postRoute.get('/all', getAllPosts);
+
 // DELETE route
 postRoute.delete('/', deletePost);
 
