@@ -1,21 +1,24 @@
 const express = require("express");
+
 const {
-  editPost,
-} = require("../controllers/postControllers/editPostController");
+  createPost,
+} = require("../controllers/postControllers/createPostController");
+const { getAllPosts } = require("../controllers/postControllers/getAllPosts");
 const {
   deletePost,
 } = require("../controllers/postControllers/deletePostController");
-const { createPost } = require("../controllers/postControllers/createPost");
+const {
+  editPost,
+} = require("../controllers/postControllers/editPostController");
 
 const postRoute = express.Router();
 
-// no questionmarks in Params url
-// Edit Route
-postRoute.patch("/", editPost);
-
 // Create Route
-postRoute.post("/create", createPost);
+postRoute.post("/", createPost);
 
+postRoute.get("/all", getAllPosts);
+// PATCH Route Edit post
+postRoute.patch("/", editPost);
 // DELETE route
 postRoute.delete("/", deletePost);
 
