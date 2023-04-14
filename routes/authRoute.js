@@ -12,8 +12,6 @@ authRoute.post("/register", register);
 authRoute.get("/logout", logout);
 authRoute.get('/check', checkLoginToken, checkUser)
 
-const express = require('express');
-
 
 module.exports = {
   authRoute,
