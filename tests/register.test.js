@@ -1,5 +1,14 @@
 const request = require('supertest');
+const {disconnect, connect} = require('../db/connect');
 const {app} = require('../app');
+
+beforeAll(async () => {
+  await connect();
+});
+
+afterAll(async () => {
+  await disconnect();
+});
 
 describe('Test User Register Endpoints', () => {
   describe('POST /auth/register with invalid payloads', () => {
