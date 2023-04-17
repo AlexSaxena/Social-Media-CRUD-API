@@ -24,12 +24,29 @@ const patchSchema = Joi.object({
   body: Joi.string().required(),
 });
 
+const likePostSchema = Joi.object({
+  id: Joi.string().length(24).required(),
+});
+
 const checkPostExist = async (id, user) => {
   const db = await getClientDB();
   const collection = db.collection('posts');
   const post = await collection.findOne({
     _id: new ObjectId(id),
     userID: user,
+  });
+  if (!post) {
+    return false;
+  }
+  return {id};
+};
+
+const checkAlreadyLiked = async (id, user) => {
+  const db = await getClientDB();
+  const collection = db.collection('posts');
+  const post = await collection.findOne({
+    _id: new ObjectId(id),
+    like: user,
   });
   if (!post) {
     return false;
@@ -44,4 +61,6 @@ module.exports = {
   deleteSchema,
   patchSchema,
   checkPostExist,
+  likePostSchema,
+  checkAlreadyLiked,
 };
