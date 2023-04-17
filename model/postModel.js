@@ -14,7 +14,6 @@ const getAllUserPostsSchema = Joi.object({
   username: Joi.string().required(),
 });
 
-// NOTE: Can be refactored later when all Schemas are at place
 const findOnePostSchema = Joi.object({
   id: Joi.string().length(24).required(),
 });
@@ -26,6 +25,11 @@ const patchSchema = Joi.object({
 
 const likePostSchema = Joi.object({
   id: Joi.string().length(24).required(),
+});
+
+const commentPostSchema = Joi.object({
+  id: Joi.string().length(24).required(),
+  commentBody: Joi.string().min(1).required(),
 });
 
 const checkPostExist = async (id, user) => {
@@ -60,6 +64,7 @@ module.exports = {
   getAllUserPostsSchema,
   deleteSchema,
   patchSchema,
+  commentPostSchema,
   checkPostExist,
   likePostSchema,
   checkAlreadyLiked,
