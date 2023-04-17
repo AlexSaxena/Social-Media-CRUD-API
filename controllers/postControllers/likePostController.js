@@ -20,7 +20,6 @@ const likePost = async (req, res) => {
       if (update.modifiedCount) {
         return res.status(200).json({message: 'Post unliked!'});
       }
-      return res.status(500).json({message: 'No changes have been made'});
     } else {
       const db = await getClientDB();
       const collection = db.collection('posts');
@@ -28,7 +27,6 @@ const likePost = async (req, res) => {
       if (update.modifiedCount) {
         return res.status(200).json({message: 'Post liked!'});
       }
-      return res.status(500).json({message: 'No changes have been made'});
     }
   } catch (error) {
     return res.status(500).json({message: 'Internal server error'});
