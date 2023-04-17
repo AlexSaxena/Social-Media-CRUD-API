@@ -1,21 +1,24 @@
-
 name: Run Jest tests
 
 on:
   pull_request:
     branches:
-    - master
+      - master
   push:
     branches:
-    - master
+      - master
 
 jobs:
   jestTest:
+    env:
+      URI: ${{ secrets.URI }}
+      DATABASE: ${{ vars.DATABASE }}
+      TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - run: npm i
       - run: npm test
