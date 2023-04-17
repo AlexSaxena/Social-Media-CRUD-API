@@ -1,11 +1,18 @@
 const { ObjectId } = require("mongodb");
 const { getClientDB } = require("../../db/connect");
+const { commentPostSchema } = require("../../model/postModel");
 
 const commentOnPost = async function (req, res) {
+  let validation = commentPostSchema.validate(req.body);
+  if (validation.error) {
+    return res
+      .status(406)
+      .json({ message: validation.error.details[0].message });
+  }
+
   const { id, commentBody } = req.body;
 
-  // Checks DB for desired post
-  const db = await getClientDB();
+  const db = getClientDB();
   const postCollection = db.collection("posts");
   const selectedPost = await postCollection.findOne({ _id: new ObjectId(id) });
 
