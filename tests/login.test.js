@@ -1,5 +1,14 @@
 const request = require('supertest');
+const {disconnect, connect} = require('../db/connect');
 const {app} = require('../app');
+
+beforeAll(async () => {
+  await connect();
+});
+
+afterAll(async () => {
+  await disconnect();
+});
 
 describe('Testing login endpoints', () => {
   describe('POST /auth/login with invalid payload', () => {

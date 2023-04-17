@@ -9,6 +9,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await disconnect();
 });
+
 describe('DELETE /posts', () => {
   it('should return status 401 if there is no ID', async () => {
     const response = await request(app).delete('/posts').send({id: ''});
@@ -24,6 +25,16 @@ describe('DELETE /posts', () => {
 describe('GET /posts/all/user', () => {
   it('should 401 and "No Active LoginToken" if try to get all user posts while not logged in', async () => {
     const response = await request(app).get('/posts/all/user');
+    expect(response.statusCode).toBe(401);
+    expect(response.body.message).toBe('No Active LoginToken');
+  });
+});
+
+describe('PATCH /posts/like', () => {
+  it('', async () => {
+    const response = await request(app).patch('/posts/like').send({
+      id: '6437bda4ec2183e3a3b897af',
+    });
     expect(response.statusCode).toBe(401);
     expect(response.body.message).toBe('No Active LoginToken');
   });
