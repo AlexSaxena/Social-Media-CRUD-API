@@ -11,6 +11,13 @@ const commentOnPost = async function (req, res) {
   }
 
   const { id, commentBody } = req.body;
+  const { user } = req.loggedInUser;
+
+  let comments = {
+    userID: user,
+    comment: commentBody,
+    date: new Date(),
+  };
 
   const db = getClientDB();
   const postCollection = db.collection("posts");
@@ -25,7 +32,7 @@ const commentOnPost = async function (req, res) {
     { _id: new ObjectId(id) },
     {
       $push: {
-        comments: commentBody,
+        comments,
       },
     },
     { $currentDate: { lastUpdated: true } }
