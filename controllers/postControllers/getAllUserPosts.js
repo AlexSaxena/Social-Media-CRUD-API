@@ -2,7 +2,7 @@ const {getClientDB} = require('../../db/connect');
 const {getAllUserPostsSchema} = require('../../model/postModel');
 
 exports.getAllUserPosts = async function getAllUserPosts(req, res) {
-  const username = req.loggedInUser.user;
+  const {username} = req.body;
 
   let validation = getAllUserPostsSchema.validate({username: username});
   if (validation.error) {
