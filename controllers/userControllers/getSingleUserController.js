@@ -18,7 +18,13 @@ exports.getSingleUser = async function getSingleUser(req, res) {
     } else {
         return res.status(404).json({ message: 'User not found' })
     }
+    const userFollowers = await collection
+        .find({ following: { $in: [username] } })
+        .toArray();
 
+    const followers = userFollowers.map((user) => user.username);
+
+    foundUser.followers = followers
 
     res.status(200).json(foundUser);
 }
