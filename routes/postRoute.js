@@ -15,7 +15,7 @@ postRoute.post('/', createPost);
 postRoute.patch('/', editPost);
 postRoute.delete('/', deletePost);
 postRoute.get('/all', getAllPosts);
-postRoute.post('/all/user', getAllUserPosts);
+postRoute.get('/all/user/:username?', getAllUserPosts);
 postRoute.get('/post/', singlePost);
 postRoute.patch('/post/', commentOnPost);
 postRoute.patch('/like', likePost);
