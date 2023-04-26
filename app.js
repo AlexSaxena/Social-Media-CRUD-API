@@ -1,13 +1,9 @@
-console.log("General Kenobi");
-
-// Dependencies
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const app = express();
 
-// Enables Cors, Cookies & JSON to be read/used
 app.use(express.json());
 app.use(
   cors({
@@ -17,7 +13,6 @@ app.use(
 );
 app.use(cookieParser());
 
-// Routes & Middleware
 const { checkLoginToken } = require("./middleware/checkLoginToken");
 const { authRoute } = require("./routes/authRoute");
 const { postRoute } = require("./routes/postRoute");
