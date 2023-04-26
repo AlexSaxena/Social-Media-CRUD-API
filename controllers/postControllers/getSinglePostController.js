@@ -12,7 +12,6 @@ const singlePost = async (req, res) => {
 
   const { id } = req.body;
 
-  // Checks DB for desired post
   const db = await connect();
   const postCollection = db.collection("posts");
   const selectedPost = await postCollection.findOne({ _id: new ObjectId(id) });
