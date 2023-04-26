@@ -1,10 +1,12 @@
-const { loginSchema, checkUserExists } = require('../../model/authModel');
-const bcrypt = require('bcrypt');
-const dotenv = require('dotenv').config({ path: '../../config/.env' });
-const jwt = require('jsonwebtoken');
+const { loginSchema, checkUserExists } = require("../../model/authModel");
+const bcrypt = require("bcrypt");
+const dotenv = require("dotenv").config({ path: "../../config/.env" });
+const jwt = require("jsonwebtoken");
 
 const generateAccessToken = (username) => {
-  return jwt.sign({ user: username }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+  return jwt.sign({ user: username }, process.env.TOKEN_SECRET, {
+    expiresIn: "1h",
+  });
 };
 
 const login = async (req, res) => {
@@ -18,26 +20,27 @@ const login = async (req, res) => {
 
       const user = await checkUserExists(username);
       if (!user) {
-        return res.status(401).json({ message: 'Login failed: Invalid credentials' });
+        return res
+          .status(401)
+          .json({ message: "Login failed: Invalid credentials" });
       } else {
         if (await bcrypt.compare(password, user.password)) {
           const accessToken = generateAccessToken(user.username);
           return res
-            .cookie('authToken', accessToken, {
+            .cookie("authToken", accessToken, {
               httpOnly: true,
-              secure: true,
-              domain: 'onrender.com',
-              sameSite: 'none'
             })
             .status(200)
-            .json({ message: 'Login successful' });
+            .json({ message: "Login successful" });
         } else {
-          return res.status(401).json({ message: 'Login failed: Invalid credentials' });
+          return res
+            .status(401)
+            .json({ message: "Login failed: Invalid credentials" });
         }
       }
     }
   } catch (err) {
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
