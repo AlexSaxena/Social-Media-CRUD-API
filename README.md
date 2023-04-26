@@ -2,6 +2,16 @@
 
 # Social Media API
 
+[![Contributors][contributors-shield]][contributors-url]
+
+## About This Project
+
+This is an API for a social Media page with Register, Login, Post & Follow functionality.  
+A client side version for this code can be found here:
+<a href="https://github.com/KennethEllebring/Backend2_Exam_Client_Side" name="client">PenFriend Client</a>
+
+<br>
+
 ### Built With
 
 [![javascript]][javascript-url]
@@ -56,10 +66,8 @@ You can install the latest version using this commmand
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[html]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
-[html-url]: https://www.w3schools.com/html/
-[css]: https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white
-[css-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[contributors-shield]: https://img.shields.io/github/contributors/AlexSaxena/Social-Media-CRUD-API.svg?style=for-the-badge
+[contributors-url]: https://github.com/AlexSaxena/Social-Media-CRUD-API/graphs/contributors
 [javascript]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
 [javascript-url]: https://www.javascript.com/
 [node]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
