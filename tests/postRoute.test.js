@@ -1,4 +1,7 @@
 const request = require('supertest');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config({path: './config/.env'});
 const {disconnect, connect} = require('../db/connect');
 const {app} = require('../app');
 
@@ -8,6 +11,34 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await disconnect();
+});
+
+describe('POST /posts', () => {
+  const tokenSecret = process.env.TOKEN_SECRET;
+  const authToken = jwt.sign({ user: 'jestertester' }, tokenSecret, { expiresIn: '1h' });
+
+  it('should return status code 201 if post was successfully created', async () => {
+    const response = await request(app)
+      .post('/posts')
+      .set('Cookie', `authToken=${authToken}`)
+      .send({ body: 'New test post' });
+    expect(response.status).toBe(201);
+  });
+
+  it('should return status code 400 if invalid payload', async () => {
+    const response = await request(app)
+      .post('/posts')
+      .set('Cookie', `authToken=${authToken}`)
+      .send({ notBody: 'New test post' });
+    expect(response.status).toBe(400);
+  });
+
+  it('should return status code 401 if not authenticated', async () => {
+    const response = await request(app)
+      .post('/posts')
+      .send({ body: 'New test post' });
+    expect(response.status).toBe(401);
+  });
 });
 
 describe('DELETE /posts', () => {
