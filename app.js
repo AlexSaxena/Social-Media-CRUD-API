@@ -17,7 +17,8 @@ const {userRoute} = require('./routes/userRoute');
 app.use(express.json());
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://penfriend.onrender.com/'],
+    origin: '*',
+    // origin: ['http://localhost:3000', 'https://penfriend.onrender.com/'],
     credentials: true,
   })
 );
